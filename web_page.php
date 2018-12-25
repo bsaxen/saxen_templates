@@ -17,10 +17,20 @@ $ts           = date_format($date, 'Y-m-d H:i:s');
 //=============================================
 
 //=============================================
-function example($x)
+function generateHtml($inp)
 //=============================================
 {
-
+  $jsonIterator = new RecursiveIteratorIterator(new RecursiveArrayIterator(json_decode($inp, TRUE)),RecursiveIteratorIterator::SELF_FIRST);
+  echo("<table border=1>");
+  foreach ($jsonIterator as $key => $val) {
+      if(is_array($val)) {
+          echo "<tr><td>$key</td><td></td></tr>";
+      } else {
+          //echo "     $key = $val";
+          if($val != -1)echo "<tr><td>$key</td><td>$val</td><tr>";
+      }
+   }
+   echo "</table>";
 }
 //=============================================
 // End of library
@@ -37,12 +47,7 @@ if (isset($_GET['do']))
 
   if($do == 'something')
   {
-    $dec = json_decode($json);
 
-    for($idx = 0; $idx < count($dec); $idx++){
-        $obj = (Array)$dec[$idx];
-        echo $obj["name"];
-    }
   }
 }
 
@@ -50,9 +55,20 @@ if (isset($_POST['do']))
 {
   $do = $_POST['do'];
 
-  if ($do == 'anything')
+  if ($do == 'generateHtml')
   {
-
+    echo("b1");
+      $json = $_POST['json'];
+      //echo("$json");
+      $d = $_POST['d'];
+      echo("$d");
+      generateHtml($json);
+  }
+  if ($do == 'abcd')
+  {
+    echo("b1");
+      $a = $_POST['a'];
+      echo("$a");
   }
 }
 //=============================================
@@ -71,7 +87,7 @@ echo "<br><br>
    <table border=0>";
 echo "
    <form action=\"#\" method=\"post\">
-     <input type=\"hidden\" name=\"do\" value=\"send_message1\">
+     <input type=\"hidden\" name=\"do\" value=\"abcd\">
      <tr><td>A</td><td> <input type=\"text\" name=\"a\" value=$a></td>
      <tr><td>B</td><td> <input type=\"text\" name=\"b\" value=$b></td>
      <tr><td>C</td><td> <input type=\"text\" name=\"c\" ></td>
@@ -82,15 +98,15 @@ echo "
 echo "<br><br>
       <table border=1>";
 echo "
-      <form action=\"#\" method=\"post\">
-        <input type=\"hidden\" name=\"do\" value=\"send_message2\">
-        <tr><td>A</td><td> <textarea rows=\"4\" cols=\"50\" name=\"comment\" form=\"usrform\">Enter text here...</textarea></td></tr>
+      <form action=\"#\" method=\"post\" name=\"jjss\">
+        <input type=\"hidden\" name=\"do\" value=\"generateHtml\">
+        <tr><td>A</td><td> <textarea name=\"json\" rows=\"4\" cols=\"50\" >Enter text here...</textarea></td></tr>
         <tr><td>D</td><td> <input type=\"text\" name=\"d\"></td>
         <td><input type= \"submit\" value=\"Send\"></td></tr>
       </form>
       </table>";
 
-echo ("<iframe src=http://81.224.182.81:3000 width=\"400\" height=\"300\"></iframe>");
+echo ("<iframe src=http://asdasd:3000 width=\"400\" height=\"300\"></iframe>");
 //=============================================
 // End of file
 //=============================================
