@@ -1,17 +1,27 @@
 import numpy as np
 import cv2
 
+#flags = [i for i in dir(cv2) if i.startswith('COLOR_')]
+#print (flags)
+#exit()
+
 R_lower_range    = np.array([0,100,100])
 R_upper_range    = np.array([0,255,255])
+#R_lower_range    = np.array([160,20,70])
+#R_upper_range    = np.array([190,255,255])
 
-Y_lower_range    = np.array([0,0,100])
-Y_upper_range    = np.array([0,0,255])
+#B_lower_range    = np.array([100,100,0])
+#B_upper_range    = np.array([255,255,0])
+B_lower_range    = np.array([101,50,38])
+B_upper_range    = np.array([110,255,255])
 
-B_lower_range    = np.array([100,100,0])
-B_upper_range    = np.array([255,255,0])
+G_lower_range    = np.array([36,0,0])
+G_upper_range    = np.array([86,255,255])
 
-G_lower_range    = np.array([100,0,100])
-G_upper_range    = np.array([255,0,255])
+
+Y_lower_range    = np.array([15,0,0])
+Y_upper_range    = np.array([36,255,255])
+
 
 cap = cv2.VideoCapture(0)
 
@@ -30,6 +40,9 @@ while(True):
     cv2.imshow('image',image)
 
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    #hsv = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    #hsv = cv2.cvtColor(image, cv2.COLOR_BAYER_BG2BGR)
+    cv2.imshow('HSV', hsv)
 
     # Red
     mask = cv2.inRange(hsv, R_lower_range, R_upper_range)
