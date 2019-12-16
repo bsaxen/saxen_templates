@@ -44,20 +44,40 @@ while(True):
     #hsv = cv2.cvtColor(image, cv2.COLOR_BAYER_BG2BGR)
     cv2.imshow('HSV', hsv)
 
+    x1 = 250
+    y1 = 400
+    x2 = 270
+    y2 = 420
     # Red
     mask = cv2.inRange(hsv, R_lower_range, R_upper_range)
     cv2.imshow('Red', mask)
+    pixel = mask[x1:y1,x2:y2]
+    #pixel = mask[x1,y1]
+    print "red "
+    print (pixel)
     # Green
     mask = cv2.inRange(hsv, G_lower_range, G_upper_range)
     cv2.imshow('Green', mask)
+    pixel = mask[x1:y1,x2:y2]
+    #pixel = mask[x1,y1]
+    print "green "
+    print (pixel)
     # Blue
     mask = cv2.inRange(hsv, B_lower_range, B_upper_range)
     cv2.imshow('Blue', mask)
+    pixel = mask[x1:y1,x2:y2]
+    #pixel = mask[x1,y1]
+    print "blue "
+    print (pixel)
     # Yellow
     mask = cv2.inRange(hsv, Y_lower_range, Y_upper_range)
     cv2.imshow('yellow', mask)
+    pixel = mask[x1:y1,x2:y2]
+    #pixel = mask[x1,y1]
+    print "yellow "
+    print (pixel)
 
-    key = cv2.waitKey(10)
+    key = cv2.waitKey(100)
     #print ("waitkey " + str(key))
     #print (str(ord('q')))
     #if key & 0xFF == ord('q'):
